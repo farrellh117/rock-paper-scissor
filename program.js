@@ -73,11 +73,9 @@ function playRound(humanChoice, computerChoice) {
 }
 
 function playGame() {
-    console.log(playRound(getHumanChoice(), getComputerChoice()));
-    console.log(playRound(getHumanChoice(), getComputerChoice()));
-    console.log(playRound(getHumanChoice(), getComputerChoice()));
-    console.log(playRound(getHumanChoice(), getComputerChoice()));
-    console.log(playRound(getHumanChoice(), getComputerChoice()));
+    for(let i = 1; i <= 5; i++) {
+        console.log(playRound(getHumanChoice(), getComputerChoice()));
+    }
 
     console.log("Skor kamu: " + humanScore);
     console.log("Skor bot: " + computerScore);
