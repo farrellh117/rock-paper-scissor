@@ -4,35 +4,31 @@ const computerDisplay = document.getElementById("computer-display");
 const resultDisplay = document.getElementById("result-display");
 const playerScoreDisplay = document.getElementById("playerScoreDisplay");
 const computerScoreDisplay = document.getElementById("computerScoreDisplay");
+
 let playerScore = 0;
 let computerScore = 0;
+let gameOver = false;
 
 function getPlayerChoice() {
     const gunting = document.getElementById("scissor-btn");
     const batu = document.getElementById("rock-btn");
     const kertas = document.getElementById("paper-btn");
 
-    gunting.addEventListener("click", function() {
-        playRound("gunting");
-    });
-
-    batu.addEventListener("click", function() {
-        playRound("batu");
-    });
-
-    kertas.addEventListener("click", function() {
-        playRound("kertas");
-    });
+    gunting.addEventListener("click", () => playRound("gunting"));
+    batu.addEventListener("click", () => playRound("batu"));
+    kertas.addEventListener("click", () => playRound("kertas"));
 }
 
 function playRound(playerChoice) {
+    if (gameOver) return;
+
     const computerChoice = choices[Math.floor(Math.random() * 3)];
     let result = "";
 
-    if(playerChoice === computerChoice) {
+    if (playerChoice === computerChoice) {
         result = "SERI!";
     } else {
-        switch(playerChoice) {
+        switch (playerChoice) {
             case "batu":
                 result = (computerChoice === "gunting") ? "KAMU MENANG!" : "KAMU KALAH!";
                 break;
@@ -46,22 +42,31 @@ function playRound(playerChoice) {
     }
 
     playerDisplay.textContent = `PLAYER: ${playerChoice}`;
-    computerDisplay.textContent = `COMPUTER: ${computerChoice}`; 
+    computerDisplay.textContent = `COMPUTER: ${computerChoice}`;
     resultDisplay.textContent = result;
-
     resultDisplay.classList.remove("greenText", "redText");
 
-    switch(result) {
-        case "KAMU MENANG!":
-            resultDisplay.classList.add("greenText");
-            playerScore++;
-            playerScoreDisplay.textContent = playerScore;
-            break;
-        case "KAMU KALAH!":
-            resultDisplay.classList.add("redText");
-            computerScore++;
-            computerScoreDisplay.textContent = computerScore;
-            break;
+    if (result === "KAMU MENANG!") {
+        playerScore++;
+        resultDisplay.classList.add("greenText");
+    } else if (result === "KAMU KALAH!") {
+        computerScore++;
+        resultDisplay.classList.add("redText");
+    }
+
+    playerScoreDisplay.textContent = playerScore;
+    computerScoreDisplay.textContent = computerScore;
+
+    checkWinner();
+}
+
+function checkWinner() {
+    if (playerScore === 5 || computerScore === 5) {
+        gameOver = true;
+        const finalResult = (playerScore === 5) ? "KAMU MENANG GAME INI! 🎉" : "KOMPUTER MENANG GAME INI! 😞";
+        resultDisplay.textContent = finalResult;
+        resultDisplay.classList.remove("greenText", "redText");
+        resultDisplay.classList.add(playerScore === 5 ? "greenText" : "redText");
     }
 }
 
