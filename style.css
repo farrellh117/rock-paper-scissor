@@ -43,6 +43,7 @@ h1 {
 }
 
 .weapon button:hover {
+    /* transform = mengubah tampilan elemen secara visual (e.g posisi, ukuran, rotasi, kemiringan, skala elemen) */
     transform: scale(1.1);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
