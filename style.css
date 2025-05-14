@@ -6,6 +6,8 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* linear-gradient = membuat gradasi warna linear */
+    /* linear-gradient(angle, color-stop1, color-stop2, ...); */
     background: linear-gradient(135deg, #74ebd5 0%, #ACB5E5 100%);
     color: #333;
     min-height: 100vh;
